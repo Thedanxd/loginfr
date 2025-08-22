@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+    
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      font-family: 'Poppins', sans-serif; 
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      background: #706d6d;
+    }
+
+    
+    .login-wrapper {
+      position: relative;
+      z-index: 100;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      padding: 48px 40px;
+      width: 400px;
+      max-width: 90vw;
+      box-shadow: 
+        0 32px 64px rgba(0, 0, 0, 0.12),
+        0 0 0 0.5px rgba(255, 255, 255, 0.05);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .login-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 
+        0 48px 100px rgba(0, 0, 0, 0.2),
+        0 0 0 0.5px rgba(255, 255, 255, 0.1);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .login-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 8px;
+      letter-spacing: -0.025em;
+    }
+
+    .login-subtitle {
+      font-size: 15px;
+      color: #000000;
+      font-weight: 400;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 16px 0;
+      font-size: 16px;
+      color: #000000;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #e5e7eb;
+      outline: none;
+      transition: all 0.3s ease;
+      font-weight: 400;
+    }
+
+    .form-input:focus,
+    .form-input:valid {
+      border-bottom-color: #000000;
+    }
+
+    .form-label {
+      position: absolute;
+      top: 16px;
+      left: 0;
+      font-size: 16px;
+      color: #9ca3af;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      font-weight: 400;
+    }
+
+    .form-input:focus + .form-label,
+    .form-input:valid + .form-label {
+      top: -8px;
+      font-size: 12px;
+      color: #000000;
+      font-weight: 500;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      margin-top: 32px;
+      background: #0e1014;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-btn:hover {
+      background: #003fa55b;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .form-link {
+      color: #6b7280;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .form-link:hover {
+      color: #1f2937;
+    }
+
+    #mensaje {
+      margin-top: 20px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-align: center;
+      min-height: 16px;
+      transition: all 0.3s ease;
+    }
+
+    #mensaje:not(:empty) {
+      background: #fef2f2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
+    }
+
+    #registroBox {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .login-card {
+        padding: 32px 24px;
+        width: 90vw;
+        border-radius: 20px;
+      }
+
+      .login-title {
+        font-size: 24px;
+      }
+
+      .form-input {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 24px 20px;
+      }
+
+      .login-title {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <div class="login-card" id="loginBox">
+      <div class="login-header">
+        <h1 class="login-title">Bienvenido</h1>
+        <p class="login-subtitle">Ingresa a tu cuenta</p>
+      </div>
+
+      <form>
+        <div class="form-group">
+          <input type="email" id="logCorreo" class="form-input" required>
+          <label class="form-label">Email</label>
+        </div>
+
+        <div class="form-group">
+          <input type="password" id="logPass" class="form-input" required>
+          <label class="form-label">Contraseña</label>
+        </div>
+
+        <button type="button" class="login-btn" onclick="login()">
+          Iniciar Sesión
+        </button>
+      </form>
+
+      <div class="form-footer">
+        <a class="form-link" onclick="mostrarRegistro()">
+          ¿No tienes cuenta? Regístrate
+        </a>
+      </div>
+    </div>
+
+    <div class="login-card" id="registroBox">
+      <div class="login-header">
+        <h1 class="login-title">Crear Cuenta</h1>
+        <p class="login-subtitle">Únete a nosotros</p>
+      </div>
+
+      <form>
+        <div class="form-group">
+          <input type="text" id="regNombre" class="form-input" required>
+          <label class="form-label">Nombre</label>
+        </div>
+
+        <div class="form-group">
+          <input type="email" id="regCorreo" class="form-input" required>
+          <label class="form-label">Email</label>
+        </div>
+
+        <div class="form-group">
+          <input type="password" id="regPass" class="form-input" required>
+          <label class="form-label">Contraseña</label>
+        </div>
+
+        <button type="button" class="login-btn" onclick="registrar()">
+          Crear Cuenta
+        </button>
+      </form>
+
+      <div class="form-footer">
+        <a class="form-link" onclick="mostrarLogin()">
+          ¿Ya tienes cuenta? Inicia sesión
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <p id="mensaje"></p>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+  <script>
+    const URL = "https://script.google.com/macros/s/AKfycby5ysV7pJZfpDecqczvc-bzoR6t_aNgr1NQEU5bPlh83S3LZVw_ihKODnT9tMyGgcjLJg/exec";
+
+    function encryptPassword(password) {
+      return CryptoJS.SHA256(password).toString();
+    }
+
+    function registrar() {
+      const nombre = document.getElementById("regNombre").value;
+      const correo = document.getElementById("regCorreo").value;
+      const contrasena = document.getElementById("regPass").value;
+
+      if (!nombre || !correo || !contrasena) {
+        document.getElementById("mensaje").innerText = "⚠️ Todos los campos son obligatorios";
+        return;
+      }
+
+      const hashedPass = encryptPassword(contrasena);
+
+      fetch(URL, {
+        method: "POST",
+        body: JSON.stringify({
+          tipo: "registro",
+          nombre: nombre,
+          correo: correo,
+          contrasena: hashedPass
+        })
+      })
+      .then(res => res.text())
+      .then(txt => {
+        if (txt.includes("ya está registrado")) {
+          document.getElementById("mensaje").innerText = "⚠️ Este correo ya tiene una cuenta";
+        } else {
+          document.getElementById("mensaje").innerText = txt;
+          document.getElementById("regNombre").value = "";
+          document.getElementById("regCorreo").value = "";
+          document.getElementById("regPass").value = "";
+        }
+      });
+    }
+
+    function login() {
+      const correo = document.getElementById("logCorreo").value;
+      const contrasena = document.getElementById("logPass").value;
+
+      if (!correo || !contrasena) {
+        document.getElementById("mensaje").innerText = "⚠️ Todos los campos son obligatorios";
+        return;
+      }
+
+      const hashedPass = encryptPassword(contrasena);
+
+      fetch(URL, {
+        method: "POST",
+        body: JSON.stringify({
+          tipo: "login",
+          correo: correo,
+          contrasena: hashedPass
+        })
+      })
+      .then(res => res.text())
+      .then(txt => document.getElementById("mensaje").innerText = txt);
+    }
+
+    function mostrarRegistro() {
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("registroBox").style.display = "block";
+      document.getElementById("mensaje").innerText = "";
+    }
+
+    function mostrarLogin() {
+      document.getElementById("loginBox").style.display = "block";
+      document.getElementById("registroBox").style.display = "none";
+      document.getElementById("mensaje").innerText = "";
+    }
+
+    // Inicializar elementos dinámicos
+    window.addEventListener('load', createDynamicElements);
+    
+    window.addEventListener('resize', () => {
+      document.querySelector('.orbs').innerHTML = '';
+      document.querySelector('.liquid-shapes').innerHTML = '';
+      createDynamicElements();
+    });
+  </script>
+</body>
+</html>
